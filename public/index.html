@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Search</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Hotel Search</h1>
+        <form id="hotelSearchForm">
+            <div class="search-grid">
+                <div class="form-group">
+                    <label for="locationInput">Location:</label>
+                    <input type="text" id="locationInput" 
+                           placeholder="Enter city name (e.g., Amsterdam, Paris)" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkIn">Check-in Date:</label>
+                    <input type="date" id="checkIn" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkOut">Check-out Date:</label>
+                    <input type="date" id="checkOut" required>
+                </div>
+                <div class="form-group">
+                    <label for="adults">Number of Adults:</label>
+                    <input type="number" id="adults" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="radius">Search Radius (km):</label>
+                    <div class="range-container">
+                        <input type="range" id="radius" min="1" max="50" value="5">
+                        <span id="radiusValue">5 km</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filters-section">
+                <h3>Filters</h3>
+                <div class="filters-grid">
+                    <div class="form-group">
+                        <label>Price Range:</label>
+                        <select id="priceRange">
+                            <option value="">Any Price</option>
+                            <option value="budget">Budget (€0-€100)</option>
+                            <option value="moderate">Moderate (€100-€200)</option>
+                            <option value="luxury">Luxury (€200+)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Hotel Rating:</label>
+                        <div class="checkbox-group" id="ratingFilters">
+                            <label><input type="checkbox" value="5"> 5 Stars</label>
+                            <label><input type="checkbox" value="4"> 4 Stars</label>
+                            <label><input type="checkbox" value="3"> 3 Stars</label>
+                            <label><input type="checkbox" value="2"> 2 Stars</label>
+                            <label><input type="checkbox" value="1"> 1 Star</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="search-button">Search Hotels</button>
+        </form>
+
+        <div id="searchControls" class="search-controls" style="display: none;">
+            <div class="sort-controls">
+                <label for="sortBy">Sort by:</label>
+                <select id="sortBy" onchange="updateSort(this.value)">
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                    <option value="rating-desc">Rating: Highest First</option>
+                </select>
+            </div>
+            <div class="results-info">
+                <span id="resultCount"></span>
+            </div>
+        </div>
+
+        <div id="results" class="results-container"></div>
+
+        <div id="pagination" class="pagination" style="display: none;">
+            <button id="prevPage" onclick="changePage(-1)">Previous</button>
+            <span id="pageInfo">Page 1 of 1</span>
+            <button id="nextPage" onclick="changePage(1)">Next</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
